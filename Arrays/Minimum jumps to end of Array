@@ -1,0 +1,23 @@
+class Solution{
+    static int minJumps(int[] arr){
+       int maxreach=0; //max distance a ladder can reach
+       int currentend=0; // max distance the current ladder can reach
+       int jumps=0;  //number of jumps
+       int l=arr.length; 
+       if(l==1) 
+          return 0;
+       for(int i=0;i<l;i++){
+          if(i+arr[i]>maxreach) 
+             maxreach=i+arr[i];
+          if(maxreach>=l-1) //we found a ladder that can take us to the end of an Array
+              return jumps+1;
+          if(i==currentend){ // we reached the end of the current ladder so need to jump to the next better ladder 
+              jumps++;
+              currentend=maxreach;
+          } 
+          if(i==maxreach) //there is no ladder found and not possible to reach the end 
+             return -1;
+       } 
+       return -1;
+    }
+}
